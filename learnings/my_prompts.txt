@@ -1,0 +1,46 @@
+Prompts Log — Deep Learning Project (s_n_p_dl_classifier)
+===========================================================
+
+1. tell the syntax on how to put the folder: input and files: my_learning_ml.md, sample.yml and
+   my_prompts_ml.txt in .gitignore file
+
+2. give me the bash syntax to put the above mentioned folder and files in the .gitignore file
+   [bash]: printf "input/\nmy_learning_ml.md\nsample.yml\nmy_prompts_ml.txt\n" >> .gitignore
+
+3. Refer the sample.yml file from the @model_files/notebooks/config folder and create a new YAML
+   file named environment.yml under the same folder location for implementing a deep learning based
+   classifier on temporal data for stock price (up/low) prediction problem. I plan to implement the
+   Deep Learning models using tensorflow and Keras libraries.
+
+4. Can you make sure the interdependent libraries mentioned in the environment.yml files have
+   appropriate versions w.r.t the python version mentioned in the yml and do not create
+   conflicts/vulnerabilities in future work
+
+5. remove the package versions from all the libraries in the environment.yml file and let the
+   script automatically figure out the most suitable version for python 3.11
+
+6. [bash]: bash create_env.sh
+   (first attempt — failed with PackagesNotFoundError: tensorflow=2.16 not found on conda channels)
+
+7. [bash]: bash create_env.sh
+   (second attempt after removing version pins — ran successfully, created dl_classification_env)
+
+8. is the ID: blxw413py still running ? (asked twice during env creation)
+
+9. Tell me the syntax to add the env folder into the .gitignore file
+   [bash]: echo "env/" >> .gitignore
+
+10. Refer the model_instructions_ml.txt file located @model_files\input folder. Create a
+    model_instructions.txt file within the same folder location i.e. @model_files\input with
+    specific instruction on training suitable Deep learning algorithms for stock price classification
+    using the data all_stocks_5yr.csv stored in the same folder. The instructions should be
+    structured chronologically to define the appropriate ML/DL flow:
+    data transformation -> EDA -> feature engineering -> model training & validation ->
+    model tuning -> performance comparison.
+
+11. what happened with the previous prompt. I don't see the model_instructions.txt file created
+    in the @model_files\input folder
+    (file was created successfully on retry)
+
+12. please create a my_prompts.txt file inside the @learnings\ folder and add all the prompts
+    from this chat history into it including the bash commands as well (if possible)

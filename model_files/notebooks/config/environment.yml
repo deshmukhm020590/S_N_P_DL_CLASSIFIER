@@ -1,0 +1,61 @@
+# ============================================================
+# environment.yml
+# Binary Classification - Deep Learning Project (TensorFlow/Keras)
+# Task: Stock Price Direction Prediction (Up/Down) on Temporal Data
+# Excludes: Data Acquisition & Experiment Tracking libraries
+# Python Version: 3.11
+# ============================================================
+
+name: dl_classification_env
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.11
+
+  # --- Core Data Handling ---
+  - numpy
+  - pandas
+  - scipy
+
+  # --- Data Visualisation ---
+  - matplotlib
+  - seaborn
+  - plotly
+
+  # --- Deep Learning (TensorFlow / Keras) ---
+  - tensorflow
+  - keras
+
+  # --- Temporal / Sequence Data Utilities ---
+  - statsmodels              # ACF/PACF, ADF stationarity, seasonal decomposition
+
+  # --- Machine Learning (Scikit-learn ecosystem) ---
+  - scikit-learn             # Preprocessing, metrics, train/test split
+  - imbalanced-learn         # SMOTE / class imbalance handling
+
+  # --- Model Evaluation & Explainability ---
+  - shap                     # Feature importance & model explainability
+
+  # --- Hyperparameter Tuning ---
+  - optuna                   # Bayesian hyperparameter optimisation
+
+  # --- Notebook & Development Environment ---
+  - jupyterlab
+  - ipykernel
+  - ipywidgets
+  - tqdm                     # Progress bars
+
+  # --- Utilities ---
+  - joblib                   # Model serialisation / parallelism
+  - pyarrow                  # Efficient parquet read/write
+
+  # --- Pip-only libraries (not available on conda-forge) ---
+  - pip
+  - pip:
+    - keras-tuner             # Keras-native hyperparameter tuning (RandomSearch, Hyperband, BayesianOpt)
+    - ta                      # Technical indicators: RSI, MACD, Bollinger Bands, EMA, SMA
+    - eli5                    # Permutation importance, model inspection
+    # pandas-ta removed — incompatible with Python 3.11+; use `ta` instead
