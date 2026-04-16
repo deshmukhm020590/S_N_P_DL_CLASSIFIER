@@ -44,3 +44,86 @@ Prompts Log — Deep Learning Project (s_n_p_dl_classifier)
 
 12. please create a my_prompts.txt file inside the @learnings\ folder and add all the prompts
     from this chat history into it including the bash commands as well (if possible)
+
+13. how do i map a remote repo to my local repo. give me the git syntax for mapping
+
+14. give me all the git steps starting from git init until git push. it should also include
+    mapping local repo to remote repo
+
+15. [bash]: git push -u origin main
+    (failed — rejected due to unrelated histories; remote had a LICENSE file with no common ancestor)
+
+16. why did the previous bash command errored out?
+    (fix: git pull origin main --allow-unrelated-histories, then git push -u origin main)
+
+17. use the instructions mentioned in the model_instructions.txt located in @model_files\input
+    folder and generate the appropriate code in the final_model.ipynb notebook saved under
+    folder location @model_files\notebooks\src\. Make sure to split the logic across multiple
+    cells within the notebook. Refer 06_final.ipynb notebook under @model_files\notebooks\derived\
+    folder and follow the same code structure while generating the code in final_model.ipynb.
+
+18. I have encountered an error in the cell # Step 3.3 - Lag Features and Price-Derived Features
+    (per ticker). Please review and resolve it.
+    (fix: added grp = grp.copy() inside add_lag_features to avoid Pandas 2.x SettingWithCopyWarning)
+
+19. Help me with error in the code
+    (error: KeyError 'Name' in Step 3.2 — user had added n = grp['Name'] manually; fix: removed
+    that unused line and added observed=True to groupby call)
+
+20. But the column 'Name' is getting dropped from the dataframe after you made the fix. Because
+    of the column 'Name' getting dropped from the dataframe, the code is erroring out in the
+    next cell block in # Step 3.3 - Lag Features and Price-Derived Features (per ticker) cell.
+    (root cause: Pandas 2.x groupby().apply() silently drops the groupby key column;
+    fix attempt 1: replaced .apply() with for _, group in df.groupby() loop — still dropped Name)
+
+21. fix the error as the updated code errored out. It says KeyError: 'Name'
+    (final fix: replaced groupby loop with df["Name"].unique() iteration + boolean mask filtering:
+        for ticker in sorted(df["Name"].unique()):
+            grp = df[df["Name"] == ticker].copy()
+            dfs.append(func(grp))
+        df = pd.concat(dfs, ignore_index=True)
+    applied to both Step 3.2 and Step 3.3 cells)
+
+22. Help me with fixing the error in cell # Step 4.2 - Time-Aware 80/20 Split
+    (no shuffle -- prevents data leakage)
+    (error: TypeError — NumPy >= 1.22 renamed interpolation= to method= in np.percentile,
+    also unreliable on datetime64; fix: replaced with index-based cutoff:
+        unique_dates = np.sort(np.unique(dates))
+        cutoff_idx   = int(len(unique_dates) * 0.8)
+        cutoff_date  = unique_dates[cutoff_idx])
+
+23. There's an error in the cell section - # Step 7.3 - Run keras-tuner BayesianOptimization
+    (20 trials). Help me resolve it.
+    (fixes applied: added overwrite=True to kt.BayesianOptimization; replaced get_best_models()
+    with explicit rebuild + refit via tuner_builders[best_model_name](best_hp); added
+    if score is None: continue guard on trial iteration; added traceback.print_exc() in
+    except block to expose full stack trace)
+
+24. i don't see the edits
+    (edits were already saved to the file; needed to close and reopen the notebook in IDE
+    to pick up external file changes)
+
+25. pls add the missing prompts from the prompt history to the my_prompts.txt file
+
+26. [git]: after previous commit/push, ran `git status` -> `git add .` -> `git commit -m "2nd: DL Model training"` -> `git push origin main`
+    (committed 31 files incl. final_model.ipynb, 06_final.ipynb, output PNGs/CSVs, scaler.pkl,
+    kt_tuner trial dirs; pushed successfully to GitHub main)
+
+27. [slash]: /model   -> switched to Opus 4.6
+
+28. how to turn the extended thinking model on in claude code?
+    (answered: use keywords -- think / think hard / think harder / ultrathink -- to allocate
+    thinking budget in prompts; no UI toggle. Works best on Sonnet/Opus.)
+
+29. [slash]: /effort  -> effort level: auto (currently medium)
+
+30. [slash]: /update-config
+    (ran Update Config skill; asked about scope + confirmation before editing)
+
+31. i want extended thinking on for just this project + Default mode ON for all supported models
+    -> created .claude/settings.json in project root with { "alwaysThinkingEnabled": true }
+    -> takes effect on next session / config reload
+
+32. [slash]: /config  -> status dialog dismissed
+
+33. save the missing prompts to the my_prompts.txt file
